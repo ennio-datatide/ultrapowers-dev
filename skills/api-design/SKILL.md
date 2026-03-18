@@ -11,10 +11,9 @@ Design APIs for the consumer, not the database. Consistent conventions, clear er
 
 ## When to Use
 
-- Designing a new API or adding endpoints
-- Standardizing error responses across a service
-- Implementing pagination, filtering, or sorting
-- Planning versioning strategy for an existing API
+- Designing new endpoints or standardizing existing ones
+- Implementing pagination, filtering, or error responses
+- Planning versioning strategy
 
 ## REST URL Conventions
 
@@ -23,108 +22,72 @@ Design APIs for the consumer, not the database. Consistent conventions, clear er
 | Collection | `GET /users` | Plural nouns, never verbs |
 | Single resource | `GET /users/42` | ID in path |
 | Nested resource | `GET /users/42/orders` | One level deep max |
-| Action (when needed) | `POST /orders/42/cancel` | Verb only when CRUD doesn't fit |
+| Action (rare) | `POST /orders/42/cancel` | Verb only when CRUD doesn't fit |
 | Filtering | `GET /users?status=active` | Query params for filters |
 
-**Avoid**: deeply nested URLs (`/users/42/orders/7/items/3/reviews`). After two levels, promote the resource to a top-level endpoint with a filter.
-
-## HTTP Methods
-
-| Method | Semantics | Idempotent | Request Body |
-|--------|-----------|------------|--------------|
-| GET | Read | Yes | No |
-| POST | Create | No | Yes |
-| PUT | Full replace | Yes | Yes |
-| PATCH | Partial update | Yes | Yes (partial) |
-| DELETE | Remove | Yes | No |
+Avoid deep nesting. After two levels, promote to top-level with a filter.
 
 ## Status Codes That Matter
 
-| Code | Meaning | When to Use |
-|------|---------|-------------|
-| 200 | OK | Successful read or update |
-| 201 | Created | Successful creation (return the resource + Location header) |
-| 204 | No Content | Successful delete, nothing to return |
-| 400 | Bad Request | Validation failed, malformed input |
-| 401 | Unauthorized | Missing or invalid authentication |
-| 403 | Forbidden | Authenticated but not permitted |
-| 404 | Not Found | Resource doesn't exist |
-| 409 | Conflict | Duplicate or state conflict |
-| 422 | Unprocessable Entity | Semantically invalid (valid JSON, wrong values) |
-| 429 | Too Many Requests | Rate limit exceeded |
-| 500 | Internal Server Error | Unexpected failure (don't expose details) |
+| Code | When to Use |
+|------|-------------|
+| 200 | Successful read or update |
+| 201 | Created (return resource + Location header) |
+| 204 | Successful delete, nothing to return |
+| 400 | Malformed input |
+| 401 | Missing or invalid authentication |
+| 403 | Authenticated but not permitted |
+| 404 | Resource doesn't exist |
+| 409 | Duplicate or state conflict |
+| 429 | Rate limit exceeded |
+| 500 | Unexpected failure (don't expose details) |
 
 ## Error Response Format
-
-Use a consistent structure across all endpoints:
 
 ```json
 {
   "error": {
     "code": "VALIDATION_FAILED",
     "message": "Human-readable summary",
-    "details": [
-      { "field": "email", "issue": "must be a valid email address" }
-    ]
+    "details": [{"field": "email", "issue": "must be valid"}]
   }
 }
 ```
 
-**Rules**: always include a machine-readable code. Never expose stack traces or internal details in production.
+Always include a machine-readable code. Never expose stack traces in production.
 
 ## Pagination
 
-| Style | Mechanism | Best For |
-|-------|-----------|----------|
-| Offset | `?page=3&per_page=20` | Simple, supports "jump to page" |
-| Cursor | `?cursor=abc123&limit=20` | Large datasets, real-time feeds, stable under inserts |
+| Style | Best For |
+|-------|----------|
+| Offset (`?page=3&per_page=20`) | Simple, supports "jump to page" |
+| Cursor (`?cursor=abc&limit=20`) | Large/changing datasets, stable under inserts |
 
-Return pagination metadata in the response body:
-
-```json
-{
-  "data": [...],
-  "pagination": {
-    "next_cursor": "abc123",
-    "has_more": true
-  }
-}
-```
-
-**Default**: cursor-based for anything that grows or changes frequently. Offset pagination breaks when rows are inserted during traversal.
+**Default**: cursor-based for anything that grows. Offset breaks when rows are inserted during traversal.
 
 ## Versioning
 
-| Strategy | Example | Trade-off |
-|----------|---------|-----------|
-| URL path | `/v1/users` | Simple, obvious, but hard to migrate |
-| Header | `Accept: application/vnd.api+json;version=2` | Clean URLs but less discoverable |
-| No versioning | Evolve carefully, don't break | Best if you control all clients |
+| Strategy | Trade-off |
+|----------|-----------|
+| URL path (`/v1/users`) | Simple, obvious, harder to migrate |
+| Header-based | Clean URLs, less discoverable |
+| No versioning | Best if you control all clients |
 
-**Practical default**: URL path versioning (`/v1/`). Only bump the version for breaking changes. Additive changes (new fields, new endpoints) don't require a new version.
+**Default**: URL path. Only bump for breaking changes. Additive changes (new fields) don't need a new version.
 
 ## Rate Limiting
 
-Return rate limit info in headers so clients can self-regulate:
-
-```
-X-RateLimit-Limit: 100
-X-RateLimit-Remaining: 42
-X-RateLimit-Reset: 1609459200
-```
-
-Return `429` with a `Retry-After` header when the limit is exceeded.
+Return limits in headers: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`. Return `429` with `Retry-After` when exceeded.
 
 ## Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|
-| Verbs in URLs (`/getUsers`, `/createOrder`) | Use nouns + HTTP methods |
-| Returning 200 for errors with error in body | Use proper HTTP status codes |
-| Inconsistent error formats across endpoints | Define one error schema, use it everywhere |
+| Verbs in URLs (`/getUsers`) | Use nouns + HTTP methods |
+| Returning 200 with error in body | Use proper status codes |
+| Inconsistent error formats | One error schema everywhere |
 | No pagination on list endpoints | Always paginate; unbounded lists break at scale |
-| Breaking changes without version bump | Additive only in current version; new version for removals |
-| Exposing internal IDs or database structure | Use stable public identifiers, don't mirror table names |
+| Breaking changes without version bump | Additive only; new version for removals |
 
 ## Attribution
 **Original** -- Datatide, MIT licensed.

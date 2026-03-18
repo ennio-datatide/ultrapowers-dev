@@ -11,94 +11,80 @@ Cache the right thing at the right layer with the right TTL. The two hardest pro
 
 ## When to Use
 
-- A read path is slow and the data doesn't change on every request
+- A read path is slow and data doesn't change every request
 - Reducing load on a database or external API
-- Choosing between caching strategies
 - Debugging stale data or inconsistency issues
 
 ## Caching Strategies
 
 | Strategy | How It Works | Best For |
 |----------|-------------|----------|
-| Cache-Aside | App checks cache, on miss reads from source and populates cache | General purpose, most common |
-| Read-Through | Cache itself fetches from source on miss | When cache layer manages population |
-| Write-Through | Writes go to cache and source synchronously | Strong consistency needs |
-| Write-Behind | Writes go to cache, async flush to source | High write throughput, eventual consistency OK |
-| Refresh-Ahead | Cache proactively refreshes before expiry | Predictable access patterns, low-latency reads |
+| Cache-Aside | App checks cache, on miss reads source and populates | General purpose, most common |
+| Read-Through | Cache fetches from source on miss | Cache layer manages population |
+| Write-Through | Writes go to cache and source synchronously | Strong consistency |
+| Write-Behind | Writes to cache, async flush to source | High write throughput |
 
-**Default choice**: cache-aside. It's simple, explicit, and you control both read and write paths.
+**Default**: cache-aside. Simple, explicit, you control both paths.
 
 ## Cache-Aside Flow
 
 ```
 read(key):
   value = cache.get(key)
-  if value is null:
-    value = database.get(key)
-    cache.set(key, value, ttl=300)
+  if miss: value = db.get(key); cache.set(key, value, ttl)
   return value
 
 write(key, value):
-  database.set(key, value)
-  cache.delete(key)          // Invalidate, don't update
+  db.set(key, value)
+  cache.delete(key)   // Delete, don't update
 ```
 
-**Delete on write, don't update.** Updating the cache risks race conditions where a stale write overwrites a newer one.
+**Delete on write, don't update** -- updating risks race conditions where a stale write overwrites a newer one.
 
 ## Invalidation Strategies
 
-| Strategy | Mechanism | Trade-off |
-|----------|-----------|-----------|
-| TTL-based | Key expires after fixed duration | Simple but serves stale data until expiry |
-| Event-based | Delete cache on write/update events | Consistent but requires event infrastructure |
-| Version-based | Key includes version number, bump on change | Good for static assets, manual management |
-| Purge on deploy | Clear cache on each deployment | Safe for config/template caches |
+| Strategy | Trade-off |
+|----------|-----------|
+| TTL-based | Simple but serves stale data until expiry |
+| Event-based | Consistent but requires event infrastructure |
+| Version-based | Good for static assets, manual management |
+| Purge on deploy | Safe for config/template caches |
 
 ## TTL Guidelines
 
-| Data Type | Suggested TTL | Rationale |
-|-----------|--------------|-----------|
-| User session | 15-30 minutes | Security and freshness |
-| API response (external) | 60-300 seconds | Reduce upstream load |
-| Configuration / feature flags | 30-60 seconds | Balance freshness with read speed |
-| Static assets | Hours to days | Versioned URLs handle invalidation |
-| Computed aggregates | Depends on staleness tolerance | Regenerate on schedule or event |
+| Data Type | Suggested TTL |
+|-----------|--------------|
+| User session | 15-30 minutes |
+| External API response | 60-300 seconds |
+| Config / feature flags | 30-60 seconds |
+| Static assets | Hours to days (version URLs handle invalidation) |
 
 ## When Caching Hurts
 
-| Scenario | Why It Hurts |
-|----------|-------------|
+| Scenario | Why |
+|----------|-----|
 | Write-heavy, read-once data | Cache churn with no read benefit |
-| Highly personalized data (unique per user) | Low hit rate, memory wasted |
-| Data that must be real-time consistent | Stale cache causes correctness bugs |
-| Cache is same speed as source | Adds complexity without performance gain |
-| Thundering herd on cold cache | All requests hit the source simultaneously |
+| Highly personalized data | Low hit rate, memory wasted |
+| Must be real-time consistent | Stale cache causes correctness bugs |
+| Cache same speed as source | Complexity without performance gain |
 
 ## Thundering Herd Prevention
 
 | Technique | How It Works |
 |-----------|-------------|
-| Lock/mutex on cache miss | One request populates, others wait |
-| Stale-while-revalidate | Serve expired value while refreshing in background |
-| Request coalescing | Deduplicate concurrent requests for the same key |
-| Warm-up on deploy | Pre-populate cache before serving traffic |
-
-## Cache Key Design
-
-- Include all parameters that affect the result: `users:{id}:profile`
-- Include version if schema changes: `v2:users:{id}`
-- Avoid unbounded keys (e.g., full query strings) -- normalize first
-- Use namespaces to enable bulk invalidation: `tenant:{tid}:*`
+| Lock on cache miss | One request populates, others wait |
+| Stale-while-revalidate | Serve expired value, refresh in background |
+| Request coalescing | Deduplicate concurrent requests for same key |
 
 ## Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|
-| Caching without a TTL | Always set a TTL -- even a long one prevents infinite stale data |
-| Updating cache on write instead of deleting | Delete on write; let the next read repopulate |
-| Caching errors or empty results | Cache only successful responses; use short TTL for "not found" if needed |
-| No monitoring on hit/miss ratio | Track hit rate -- below 80% means your cache isn't helping |
-| Ignoring cold-start behavior | Plan for empty cache: warm-up, rate limiting, or stale-while-revalidate |
+| No TTL set | Always set a TTL -- prevents infinite stale data |
+| Updating cache on write instead of deleting | Delete on write; next read repopulates |
+| Caching errors or empty results | Cache only successful responses |
+| No hit/miss monitoring | Track hit rate -- below 80% means cache isn't helping |
+| Ignoring cold-start behavior | Plan warm-up or stale-while-revalidate |
 
 ## Attribution
 **Original** -- Datatide, MIT licensed.

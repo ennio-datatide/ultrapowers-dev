@@ -68,5 +68,14 @@ Use the `src/` layout to prevent accidental imports of the source tree. All tool
 | Not using virtual environments | Always isolate: `uv venv` or `python -m venv .venv` |
 | Ignoring type checker errors | Run `mypy --strict` or `pyright` in CI -- treat errors as blockers |
 
+## Related Framework Skills
+
+| Framework | Official Skill? | Status |
+|-----------|:---:|--------|
+| **FastAPI** | Partial | `fastapi-patterns` in this repo |
+| **Django** | No | `django-patterns` in this repo |
+| **Flask** | No | `flask-patterns` in this repo |
+| **Supabase** | [Yes](https://github.com/supabase/agent-skills) (37.7K installs) | `supabase-patterns` in this repo complements it |
+
 ## Attribution
-**Original** -- Datatide, MIT licensed.
+**Original** — Datatide, MIT licensed.

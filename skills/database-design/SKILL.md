@@ -14,26 +14,24 @@ Normalize by default, denormalize with intent. Every index speeds up reads and s
 - Designing a new schema or adding tables
 - Optimizing slow queries
 - Planning migrations for a production database
-- Deciding whether to denormalize
 
 ## Normalization Quick Guide
 
 | Normal Form | Rule | Violation Example |
 |-------------|------|------------------|
-| 1NF | No repeating groups, atomic values | `tags: "a,b,c"` in a single column |
-| 2NF | No partial dependencies on composite keys | Non-key column depends on only part of the key |
-| 3NF | No transitive dependencies | `order.customer_name` when you already have `customer_id` |
+| 1NF | Atomic values, no repeating groups | `tags: "a,b,c"` in a single column |
+| 2NF | No partial dependencies on composite keys | Column depends on only part of the key |
+| 3NF | No transitive dependencies | `order.customer_name` when you have `customer_id` |
 
-**Start at 3NF.** Denormalize only when you have measured query performance that justifies it.
+**Start at 3NF.** Denormalize only when measured query performance justifies it.
 
 ## When to Denormalize
 
 | Situation | Approach |
 |-----------|----------|
-| Read-heavy dashboard with expensive joins | Materialized view or summary table |
+| Expensive joins on read-heavy paths | Materialized view or summary table |
 | Frequently accessed computed value | Store it, update on write |
 | Cross-service data (can't join) | Duplicate what you need, sync via events |
-| Reporting on historical data | Snapshot tables that don't change |
 
 Always document *why* you denormalized and *how* consistency is maintained.
 
@@ -41,64 +39,43 @@ Always document *why* you denormalized and *how* consistency is maintained.
 
 | Query Pattern | Index Type |
 |--------------|------------|
-| Exact match (`WHERE status = 'active'`) | B-tree on `status` |
-| Range query (`WHERE created_at > ?`) | B-tree on `created_at` |
-| Multi-column filter (`WHERE user_id = ? AND status = ?`) | Composite index `(user_id, status)` |
+| Exact match (`WHERE status = ?`) | B-tree on that column |
+| Range query (`WHERE created_at > ?`) | B-tree on that column |
+| Multi-column filter | Composite index: equality columns first, range last |
 | Full-text search | Full-text index or search engine |
-| Existence check on nullable column | Partial index where column IS NOT NULL |
 
-### Composite Index Order
+**Composite index order**: `(tenant_id, status, created_at)` -- equality columns first, range column last.
 
-Put the most selective (highest cardinality) column first, then range columns last:
+## Migration Safety
 
-```
--- Query: WHERE tenant_id = ? AND status = ? AND created_at > ?
--- Index: (tenant_id, status, created_at)
--- Equality columns first, range column last
-```
+| Operation | Safe Approach |
+|-----------|--------------|
+| Add column | Nullable or with default; never NOT NULL without default |
+| Remove column | Stop reading first, deploy, then drop |
+| Rename column | Add new, copy, migrate readers, drop old |
+| Add index | Concurrently if supported (avoids locking) |
 
-## Migration Safety Checklist
+Every migration must be reversible or have a documented rollback plan.
 
-| Step | Rule |
-|------|------|
-| Add column | Add as nullable or with default; never add NOT NULL to existing table without default |
-| Remove column | Stop reading it first, deploy, then drop |
-| Rename column | Add new, copy data, migrate readers, drop old |
-| Add index | Use `CREATE INDEX CONCURRENTLY` if supported (avoids locking) |
-| Change type | Add new column, migrate data, swap readers, drop old |
-
-**Rule**: every migration must be reversible or have a documented rollback plan.
-
-## Query Optimization Checklist
+## Query Optimization
 
 | Check | Action |
 |-------|--------|
-| Missing index | Run EXPLAIN, look for sequential scans on large tables |
-| N+1 queries | Batch or join; load related data in one query |
-| SELECT * | Select only the columns you need |
-| Unbounded queries | Always use LIMIT; paginate results |
-| Lock contention | Keep transactions short; avoid long-held locks |
-| Unused indexes | Drop them -- they cost write performance for nothing |
-
-## Schema Design Patterns
-
-| Pattern | Use Case |
-|---------|----------|
-| Soft delete (`deleted_at`) | Need to recover data, audit trails |
-| Polymorphic association | Multiple types share a relationship (use with caution) |
-| Enum table | Reference table for status codes instead of raw strings |
-| Audit log table | Append-only table tracking who changed what and when |
-| Tenant ID on every table | Multi-tenant isolation at the row level |
+| Missing index | EXPLAIN; look for sequential scans |
+| N+1 queries | Batch or join in one query |
+| SELECT * | Select only needed columns |
+| Unbounded queries | Always LIMIT; paginate results |
+| Unused indexes | Drop them -- they cost write performance |
 
 ## Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|
-| No indexes on foreign keys | Add indexes on every FK column |
+| No indexes on foreign keys | Index every FK column |
 | Indexing every column "just in case" | Index based on actual query patterns |
-| Storing money as floating point | Use integer cents or a decimal/numeric type |
-| Running DDL without a migration tool | Use versioned, reviewable migration files |
-| Giant transactions that lock many rows | Break into smaller batches, commit frequently |
+| Storing money as floating point | Use integer cents or decimal type |
+| DDL without a migration tool | Use versioned, reviewable migration files |
+| Giant transactions locking many rows | Smaller batches, commit frequently |
 
 ## Attribution
 **Original** -- Datatide, MIT licensed.

@@ -88,5 +88,17 @@ Use `.js` extensions in imports when targeting ESM (`"type": "module"` in `packa
 | Barrel files (`index.ts` re-exports) in large projects | They break tree-shaking and slow builds -- import directly |
 | Not using `import type` for types | Enable `verbatimModuleSyntax` to enforce separation |
 
+## Related Framework Skills
+
+| Framework | Official Skill? | Status |
+|-----------|:---:|--------|
+| **React** | [Yes](https://github.com/vercel-labs/agent-skills) (221.6K installs) | `react-best-practices` in this repo (derived) |
+| **Next.js** | [Yes](https://github.com/vercel-labs/next-skills) (37K installs) | `nextjs-patterns` in this repo complements it |
+| **Vue** | [Yes](https://github.com/antfu/skills) (4.2K stars) | Reference official |
+| **Angular** | No | `angular-patterns` in this repo |
+| **Svelte** | Partial | Community only (192 stars) |
+| **NestJS** | Partial | `nestjs-patterns` in this repo |
+| **Express** | No | `express-patterns` in this repo |
+
 ## Attribution
-**Original** -- Datatide, MIT licensed. Inspired by [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) for React/Next.js patterns.
+**Original** — Datatide, MIT licensed. Inspired by [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) for React/Next.js patterns.

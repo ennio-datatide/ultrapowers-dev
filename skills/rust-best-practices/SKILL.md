@@ -83,5 +83,13 @@ enum AppError {
 | Unused `Result` -- silently ignoring errors | Compiler warns; never `let _ = fallible_call()` without justification |
 | Over-generic code | Start concrete, generalize only when you have 2+ call sites |
 
+## Related Framework Skills
+
+| Framework | Official Skill? | Status |
+|-----------|:---:|--------|
+| **Axum** | No | Gap — consider creating `axum-patterns` |
+| **Actix Web** | No | Gap |
+| **Tokio** | No | Gap — async runtime patterns |
+
 ## Attribution
-**Original** -- Datatide, MIT licensed.
+**Original** — Datatide, MIT licensed.

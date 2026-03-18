@@ -13,89 +13,64 @@ Start with a monolith, extract services only when forced by concrete scaling, te
 
 - Starting a new system or major feature
 - Evaluating whether to split a monolith
-- Choosing between architectural patterns (hexagonal, event-driven, CQRS)
-- Reviewing system boundaries and communication patterns
+- Choosing between architectural patterns
 
-## Monolith vs Microservices Decision
+## Monolith vs Microservices
 
 | Factor | Stay Monolith | Consider Splitting |
 |--------|--------------|-------------------|
-| Team size | < 20 engineers | Independent teams own independent services |
-| Deployment | Single deploy pipeline works fine | One module's deploys block another's |
-| Scaling | Uniform load, scale the whole thing | One component needs 10x the resources |
-| Data | Shared database is manageable | Modules need fundamentally different data stores |
-| Complexity | Business logic is interconnected | Clear bounded contexts with minimal cross-talk |
+| Team size | < 20 engineers | Independent teams need independent deploys |
+| Deployment | Single pipeline works | One module's deploys block another's |
+| Scaling | Uniform load | One component needs 10x resources |
+| Data | Shared database is fine | Modules need different data stores |
 
-**Default**: monolith with clean internal boundaries (modular monolith). You can always extract later; merging microservices back is painful.
+**Default**: modular monolith with clean internal boundaries. Extract later; merging services back is painful.
 
 ## Architectural Patterns
 
 | Pattern | Core Idea | Best For |
 |---------|-----------|----------|
-| Layered | UI -> Service -> Repository -> DB | Simple CRUD apps, small teams |
-| Hexagonal (Ports & Adapters) | Business logic at center, adapters at edges | Systems with multiple integrations |
-| Clean Architecture | Dependency arrows point inward | Complex domains needing testability |
+| Layered | UI -> Service -> Repository -> DB | Simple CRUD, small teams |
+| Hexagonal | Business core with adapter edges | Multiple integrations |
+| Clean Architecture | Dependencies point inward only | Complex domains needing testability |
 | Event-Driven | Components communicate via events | Decoupled workflows, audit trails |
-| CQRS | Separate read and write models | Read-heavy systems with complex queries |
+| CQRS | Separate read and write models | Read-heavy with complex queries |
 
 ## Hexagonal Architecture
 
-```
-[External World]
-    |
-[Adapter] -- implements --> [Port (interface)]
-                                  |
-                          [Business Logic Core]
-                                  |
-                          [Port (interface)] <-- implements -- [Adapter]
-                                                                  |
-                                                          [Database / API]
-```
-
-The core knows nothing about HTTP, databases, or frameworks. Adapters translate between the outside world and the core's ports.
+The core knows nothing about HTTP, databases, or frameworks. Adapters translate between the outside world and the core's ports (interfaces). All dependency arrows point inward.
 
 ## Event-Driven Patterns
 
-| Pattern | Flow | Use When |
-|---------|------|----------|
-| Event Notification | Fire and forget, subscribers react | Loose coupling, eventual consistency is OK |
-| Event-Carried State | Event contains all data needed | Subscribers shouldn't query back |
-| Event Sourcing | Store events as source of truth | Need full audit trail, time-travel debugging |
-
-## CQRS Guidelines
-
-| Aspect | Command Side | Query Side |
-|--------|-------------|------------|
-| Model | Optimized for writes and validation | Optimized for reads and display |
-| Storage | Normalized, consistent | Denormalized, eventually consistent |
-| Complexity | Worth it when read/write models diverge significantly |
-
-Don't adopt CQRS unless your read and write models are genuinely different. For most apps, one model is simpler and sufficient.
+| Pattern | Use When |
+|---------|----------|
+| Event Notification | Loose coupling, eventual consistency OK |
+| Event-Carried State | Subscribers shouldn't query back |
+| Event Sourcing | Full audit trail, time-travel debugging |
 
 ## Service Communication
 
-| Method | Coupling | Consistency | Use When |
-|--------|---------|-------------|----------|
-| Synchronous (HTTP/gRPC) | Higher | Strong | Request/response, real-time needs |
-| Async messaging (queue) | Lower | Eventual | Background work, cross-service events |
-| Shared database | Highest | Strong | Avoid in distributed systems |
+| Method | Coupling | Use When |
+|--------|---------|----------|
+| Synchronous (HTTP/gRPC) | Higher | Request/response, real-time |
+| Async messaging (queue) | Lower | Background work, cross-service events |
 
 ## Boundary Design Rules
 
-1. **One team, one service** -- organizational boundaries drive service boundaries
+1. **One team, one service** -- org boundaries drive service boundaries
 2. **Share contracts, not code** -- APIs and schemas, not libraries
-3. **Own your data** -- each service owns its datastore, no shared databases
-4. **Design for failure** -- every network call can fail; handle it
+3. **Own your data** -- each service owns its datastore
+4. **Design for failure** -- every network call can fail
 
 ## Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|
 | Starting with microservices on day one | Start monolith, extract when pain is concrete |
-| Distributed monolith (services that must deploy together) | If they can't deploy independently, merge them |
+| Distributed monolith | If they can't deploy independently, merge them |
 | Sharing a database between services | Each service owns its data; sync via events or APIs |
-| Choosing architecture based on resume appeal | Choose based on team size, problem complexity, and constraints |
-| No clear module boundaries in the monolith | Define internal boundaries now so extraction is possible later |
+| Architecture based on resume appeal | Choose based on team size and constraints |
+| No module boundaries in the monolith | Define boundaries now so extraction is possible later |
 
 ## Attribution
 **Original** -- Datatide, MIT licensed.

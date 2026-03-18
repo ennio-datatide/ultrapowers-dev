@@ -7,7 +7,7 @@ description: >
 
 # Testing & TDD
 
-Write the test first, watch it fail, make it pass, then refactor. Every shortcut in testing is a bug you'll debug later.
+Write the test first, watch it fail, make it pass, refactor. Every testing shortcut is a bug you'll debug later.
 
 ## When to Use
 
@@ -33,14 +33,6 @@ Each cycle: 1-5 minutes. Longer means your step is too big.
 | One assertion per concept | Each test verifies one logical thing |
 | Independent and isolated | No test depends on another's state |
 | Fast | Unit tests: milliseconds. Slow tests don't get run |
-
-## Testing Pyramid
-
-| Level | Scope | Quantity |
-|-------|-------|----------|
-| Unit | Single function/class | Many |
-| Integration | Components together | Some |
-| E2E | Full system flows | Few |
 
 ## Mocking Decision Table
 
@@ -68,7 +60,7 @@ Each cycle: 1-5 minutes. Longer means your step is too big.
 |--------|---------|
 | "I'll add tests later" | You won't. Write them now. |
 | "Too simple to test" | Simple code calls complex code. Test the boundary. |
-| "Tests slow me down" | Debugging without tests slows you down more. |
+| "Tests slow me down" | Debugging without tests is slower. |
 | "I'll just test manually" | You'll test it once. Automated tests run forever. |
 
 ## Common Mistakes
@@ -79,7 +71,7 @@ Each cycle: 1-5 minutes. Longer means your step is too big.
 | Testing private methods directly | Test through the public interface |
 | Enormous test setup | Extract builders/factories, simplify the scenario |
 | Ignoring flaky tests | Fix or delete immediately -- flaky tests erode trust |
-| No test for the bug you just fixed | Every bug fix starts with a failing test that reproduces it |
+| No test for the bug you fixed | Every bug fix starts with a failing test |
 
 ## Attribution
 **Original** -- Datatide, MIT licensed.
