@@ -3,9 +3,10 @@
   "description": "Development skills for Claude Code: language best practices, framework patterns, architecture, testing, and AI agent patterns",
   "version": "1.0.0",
   "author": {
-    "name": "Ennio Maldonado"
+    "name": "Ennio Maldonado",
+    "url": "https://www.enniomaldonado.com"
   },
-  "homepage": "https://github.com/ennio-datatide/ultrapowers-dev",
+  "homepage": "https://www.datatide.com",
   "repository": "https://github.com/ennio-datatide/ultrapowers-dev",
   "license": "MIT",
   "keywords": ["skills", "development", "patterns", "architecture", "testing", "best-practices", "frameworks"]
