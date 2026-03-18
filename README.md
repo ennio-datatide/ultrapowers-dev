@@ -10,10 +10,18 @@ Each skill is self-contained and triggers automatically when relevant. No specia
 
 ## Installation
 
-### Claude Code Official Marketplace
+### Claude Code (via Ultrapowers Marketplace)
+
+Register the marketplace first (one time):
 
 ```bash
-/plugin install ultrapowers-dev@ennio-datatide
+/plugin marketplace add ennio-datatide/ultrapowers
+```
+
+Then install:
+
+```bash
+/plugin install ultrapowers-dev@ultrapowers
 ```
 
 ### From Source
