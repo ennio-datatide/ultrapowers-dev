@@ -1,6 +1,6 @@
 # Ultrapowers Dev
 
-52 development skills for your coding agents — language best practices for 13 languages, 12 framework patterns, 7 agentic patterns, and architecture fundamentals. A companion plugin to [Ultrapowers](https://github.com/ennio-datatide/ultrapowers).
+53 development skills for your coding agents — language best practices for 13 languages, 12 framework patterns, 7 agentic patterns, and architecture fundamentals. A companion plugin to [Ultrapowers](https://github.com/ennio-datatide/ultrapowers).
 
 **[Documentation](https://www.datatide.com/ultrapowers)** · **[GitHub](https://github.com/ennio-datatide/ultrapowers-dev)** · **[Issues](https://github.com/ennio-datatide/ultrapowers-dev/issues)**
 
@@ -121,6 +121,12 @@ Frameworks where no official skill exists. Each language skill points to these.
 | `react-best-practices` | Derived from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT) |
 | `react-patterns` | Canonical React patterns for component design, hooks, and state |
 | `web-design-guidelines` | Derived from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT) |
+
+### Plugin Development (1)
+
+| Skill | What it covers |
+|-------|---------------|
+| `plugin-development` | Plugin structure, skill authoring, marketplace setup, versioning, multi-platform distribution |
 
 ### Browser & E2E (2)
 
