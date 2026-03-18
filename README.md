@@ -1,12 +1,20 @@
 # Ultrapowers Dev
 
-Development skills for your coding agents — language best practices, framework patterns, agentic patterns, and architecture. A companion plugin to [Ultrapowers](https://github.com/ennio-datatide/ultrapowers).
+52 development skills for your coding agents — language best practices for 13 languages, 12 framework patterns, 7 agentic patterns, and architecture fundamentals. A companion plugin to [Ultrapowers](https://github.com/ennio-datatide/ultrapowers).
+
+**[Documentation](https://www.datatide.com/ultrapowers)** · **[GitHub](https://github.com/ennio-datatide/ultrapowers-dev)** · **[Issues](https://github.com/ennio-datatide/ultrapowers-dev/issues)**
 
 ## How it works
 
 These skills give your coding agent deep expertise across languages, frameworks, and architectural patterns. When your agent encounters a React component, a FastAPI endpoint, or a Rust service, it automatically applies the right patterns and best practices.
 
 Each skill is self-contained and triggers automatically when relevant. No special commands needed — your agent just has development superpowers.
+
+## Example
+
+> "Refactor our Express API to FastAPI."
+
+The agent automatically applies express-patterns to understand the existing code, python-best-practices and fastapi-patterns for the migration, api-design for endpoint conventions, error-handling for proper Result patterns, and testing-tdd to ensure every endpoint has coverage before and after the switch.
 
 ## Installation
 
@@ -114,7 +122,7 @@ Frameworks where no official skill exists. Each language skill points to these.
 | `react-patterns` | Canonical React patterns for component design, hooks, and state |
 | `web-design-guidelines` | Derived from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT) |
 
-### Browser & E2E
+### Browser & E2E (2)
 
 | Skill | What it covers |
 |-------|---------------|
@@ -156,7 +164,7 @@ We believe in giving credit where it's due. Each skill has an attribution sectio
 ## Companion Plugins
 
 - **[ultrapowers](https://github.com/ennio-datatide/ultrapowers)** — Core workflow engine (brainstorming → research → planning → implementation)
-- **[ultrapowers-business](https://github.com/ennio-datatide/ultrapowers-business)** — Business skills (marketing, compliance, finance, communication)
+- **[ultrapowers-business](https://github.com/ennio-datatide/ultrapowers-business)** — 38 business skills (marketing, compliance, finance, communication)
 
 ## Updating
 
@@ -181,4 +189,5 @@ Skills live directly in this repository. To contribute:
 
 Built by [Ennio Maldonado](https://www.enniomaldonado.com) at [Datatide](https://www.datatide.com).
 
+- **Docs**: https://www.datatide.com/ultrapowers
 - **Issues**: https://github.com/ennio-datatide/ultrapowers-dev/issues
