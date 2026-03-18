@@ -4,7 +4,7 @@ Development skills library for the [ultrapowers](https://github.com/ennio-datati
 
 **Companion repos:**
 - [ultrapowers](https://github.com/ennio-datatide/ultrapowers) — Workflow engine (brainstorming → research → planning → implementation)
-- [ultrapowers-misc](https://github.com/ennio-datatide/ultrapowers-misc) — Non-dev skills (marketing, compliance, finance, communication)
+- [ultrapowers-business](https://github.com/ennio-datatide/ultrapowers-business) — Non-dev skills (marketing, compliance, finance, communication)
 
 ## Attribution
 
