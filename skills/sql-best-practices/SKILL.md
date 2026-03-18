@@ -5,27 +5,25 @@ description: "Use when writing or reviewing SQL queries. Covers query optimizati
 
 # SQL Best Practices
 
-Good SQL is about telling the database *what* you want and giving it the indexes to find it fast. Every slow query has a missing index or an unnecessary scan.
+Every slow query has a missing index or an unnecessary scan. Tell the database *what* you want and give it the indexes to find it fast.
 
 ## Query Optimization
 
 - **Select only needed columns.** Never `SELECT *` in production -- it prevents covering indexes and wastes bandwidth.
 - **Filter early.** Push `WHERE` clauses as close to base tables as possible; filter before joining.
-- **Use EXISTS over IN** for correlated subqueries -- the optimizer can short-circuit.
 - **Avoid functions on indexed columns** in WHERE clauses: `WHERE created_at >= '2024-01-01'` not `WHERE YEAR(created_at) = 2024`.
 
 ## Indexing
 
 - **Index columns in WHERE, JOIN, and ORDER BY clauses.** Check query plans to verify index usage.
 - **Composite indexes:** put high-selectivity columns first; the leftmost prefix rule applies.
-- **Covering indexes** include all columns a query needs, avoiding table lookups entirely.
 - **Don't over-index.** Each index slows writes. Remove unused indexes periodically.
 
 ## JOINs & CTEs
 
 - **Prefer explicit JOIN syntax** over comma-separated tables. Always specify `INNER`, `LEFT`, etc.
 - **CTEs for readability.** Use `WITH` clauses to name intermediate result sets.
-- **Recursive CTEs** for tree/graph traversal: `WITH RECURSIVE` works in PostgreSQL, MySQL 8+, and SQLite 3.8.3+.
+- **Recursive CTEs** for tree/graph traversal: `WITH RECURSIVE` (PostgreSQL, MySQL 8+, SQLite 3.8.3+).
 
 ## Window Functions
 
@@ -52,7 +50,6 @@ Good SQL is about telling the database *what* you want and giving it the indexes
 | `SELECT *` in production queries | List explicit columns; enables covering indexes |
 | Implicit type casting in WHERE | Match column types exactly to avoid index bypass |
 | Unbounded queries (no LIMIT) | Always paginate user-facing queries with LIMIT/OFFSET or cursor |
-| Locking from long transactions | Keep transactions short; use `READ COMMITTED` where safe |
 
 ## Attribution
 **Original** -- Datatide, MIT licensed.

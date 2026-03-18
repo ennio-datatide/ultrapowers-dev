@@ -5,13 +5,13 @@ description: "Use when building UIs with Tailwind CSS. Covers utility-first appr
 
 # Tailwind Patterns
 
-Tailwind is utility-first: compose small, single-purpose classes instead of writing custom CSS. The constraint is the design system -- stay within the scale and your UI stays consistent.
+Compose small, single-purpose utility classes instead of writing custom CSS. Stay within the design system scale and your UI stays consistent.
 
 ## Utility-First Approach
 
 - **Compose in markup.** `className="flex items-center gap-4 rounded-lg bg-white p-6 shadow-md"` replaces a custom `.card` class.
-- **Avoid premature abstraction.** Repeat utility strings across similar elements before extracting a component. Duplication in markup is cheaper than wrong abstractions in CSS.
-- **Use `@apply` sparingly** -- only in base styles or third-party component overrides. If you are writing `@apply` extensively, you are fighting the framework.
+- **Avoid premature abstraction.** Repeat utility strings before extracting a component.
+- **Use `@apply` sparingly** -- only in base styles or third-party component overrides.
 
 ## Design Tokens & Theme
 
@@ -36,24 +36,13 @@ Tailwind is utility-first: compose small, single-purpose classes instead of writ
 ## Component Extraction
 
 - **Extract to React/Vue/Svelte components** -- not CSS classes. The component is the abstraction boundary.
-  ```tsx
-  function Button({ variant = 'primary', children }) {
-    const styles = { primary: 'bg-brand-500 text-white', secondary: 'bg-gray-100 text-gray-900' };
-    return <button className={`rounded-lg px-4 py-2 font-medium ${styles[variant]}`}>{children}</button>;
-  }
-  ```
 - **`clsx` or `tailwind-merge`** for conditional class composition without conflicts.
 - **`cva` (class-variance-authority)** for type-safe variant APIs across multiple props.
 
 ## Plugin System
 
-- **Official plugins:** `@tailwindcss/typography` (prose styling), `@tailwindcss/forms` (form resets), `@tailwindcss/container-queries`.
-- **Custom plugins** for project-specific utilities:
-  ```typescript
-  plugin(({ addUtilities }) => {
-    addUtilities({ '.text-balance': { 'text-wrap': 'balance' } });
-  })
-  ```
+- **Official plugins:** `@tailwindcss/typography` (prose), `@tailwindcss/forms` (resets), `@tailwindcss/container-queries`.
+- **Custom plugins** for project-specific utilities via `plugin(({ addUtilities }) => { ... })`.
 
 ## Dark Mode
 

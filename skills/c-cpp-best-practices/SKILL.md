@@ -29,7 +29,6 @@ C gives you full control; C++ gives you abstractions to manage that control safe
 | AddressSanitizer | Runtime detection of buffer overflows, use-after-free (`-fsanitize=address`) |
 | Valgrind / `memcheck` | Memory leak detection, uninitialised reads |
 | `clang-format` | Code formatting -- enforce in CI |
-| `cppcheck` | Additional static analysis for C and C++ |
 
 ## Testing
 

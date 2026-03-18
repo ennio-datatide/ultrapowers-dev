@@ -5,22 +5,13 @@ description: "Use when building or reviewing Next.js applications. Covers App Ro
 
 # Next.js Patterns
 
-Next.js blurs the line between server and client. The App Router defaults to Server Components -- code runs on the server unless you opt into the client. Understand the boundary and you control performance.
+The App Router defaults to Server Components -- code runs on the server unless you opt in to the client. Understand the boundary and you control performance.
 
 ## App Router Fundamentals
 
 - **`app/` directory** uses file-system routing. `page.tsx` renders a route, `layout.tsx` wraps children, `loading.tsx` provides Suspense fallbacks.
 - **Server Components by default.** Add `'use client'` only when you need browser APIs, state, or event handlers.
 - **Push `'use client'` as low as possible.** Keep parent layouts as Server Components; wrap only the interactive leaf.
-
-## Server Components vs Client Components
-
-| Aspect | Server Component | Client Component |
-|---|---|---|
-| Runs on | Server only | Server (SSR) + Client (hydration) |
-| Can use | `async/await`, DB access, fs | `useState`, `useEffect`, event handlers |
-| Bundle impact | Zero JS sent to client | Included in client bundle |
-| Data fetching | `fetch()` or direct DB calls | SWR, React Query, or Server Actions |
 
 ## Server Actions
 
@@ -33,14 +24,12 @@ Next.js blurs the line between server and client. The App Router defaults to Ser
 
 - **`fetch()` in Server Components** is extended with caching: `fetch(url, { next: { revalidate: 60 } })`.
 - **Static by default.** Pages are statically rendered unless they use dynamic functions (`cookies()`, `headers()`, `searchParams`).
-- **ISR (Incremental Static Regeneration):** set `revalidate` in `fetch` or at the page/layout level to rebuild pages in the background.
-- **`unstable_cache`** for caching non-fetch data (DB queries, computations) with tags.
+- **ISR:** set `revalidate` to rebuild pages in the background without full redeploy.
 
 ## Middleware
 
-- `middleware.ts` at the project root runs on every request before routing.
-- Use for auth redirects, geolocation, A/B testing, and header manipulation.
-- **Keep middleware lightweight** -- it runs on the Edge Runtime with limited APIs (no Node.js `fs`, `path`, etc.).
+- `middleware.ts` at the project root runs before routing. Use for auth redirects, geolocation, A/B testing.
+- **Keep middleware lightweight** -- it runs on the Edge Runtime with limited APIs.
 
 ## Route Organization
 

@@ -15,18 +15,10 @@ Spring Boot is convention over configuration for the JVM. Auto-configuration doe
 
 ## Layered Architecture
 
-```
-controller/     @RestController -- HTTP request/response mapping
-service/        @Service        -- Business logic, transaction boundaries
-repository/     @Repository     -- Data access (Spring Data JPA / JDBC)
-model/          @Entity         -- Domain entities
-dto/            Records/POJOs   -- API request/response shapes
-config/         @Configuration  -- Bean definitions, security, CORS
-```
-
-- **Controllers are thin.** Validate input, delegate to services, map responses. No business logic.
-- **Services own transactions.** Annotate with `@Transactional` at the service method level.
-- **Repositories extend interfaces.** `JpaRepository<Entity, ID>` gives you CRUD + pagination for free.
+- **Controller** (`@RestController`): thin HTTP mapping. Validate input, delegate, respond.
+- **Service** (`@Service`): business logic, `@Transactional` boundaries.
+- **Repository** (`@Repository`): data access. `JpaRepository<Entity, ID>` gives CRUD + pagination.
+- **Config** (`@Configuration`): bean definitions, security, CORS.
 
 ## Bean Lifecycle & Profiles
 
@@ -47,7 +39,6 @@ config/         @Configuration  -- Bean definitions, security, CORS
 - **`@WebMvcTest(Controller.class)`** loads only the web layer. Use `MockMvc` for controller tests.
 - **`@DataJpaTest`** for repository tests with an embedded database.
 - **Mock dependencies** with `@MockBean` to isolate the layer under test.
-- **TestContainers** for integration tests against real databases (PostgreSQL, Redis).
 
 ## Common Pitfalls
 

@@ -1,6 +1,10 @@
-# Ultrapowers Skills
+# Ultrapowers Dev
 
-A library of 49 development best practices, agentic patterns, and framework skills for the [ultrapowers](https://github.com/ennio-datatide/ultrapowers) workflow.
+Development skills library for the [ultrapowers](https://github.com/ennio-datatide/ultrapowers) workflow — best practices, agentic patterns, language idioms, and framework skills.
+
+**Companion repos:**
+- [ultrapowers](https://github.com/ennio-datatide/ultrapowers) — Workflow engine (brainstorming → research → planning → implementation)
+- [ultrapowers-misc](https://github.com/ennio-datatide/ultrapowers-misc) — Non-dev skills (marketing, compliance, finance, communication)
 
 ## Attribution
 
@@ -114,7 +118,7 @@ These frameworks have high-quality official skills — use those, not ours:
 
 ```bash
 # Claude Code
-/plugin install ultrapowers-skills@ennio-datatide
+/plugin install ultrapowers-dev@ennio-datatide
 ```
 
 ## License
