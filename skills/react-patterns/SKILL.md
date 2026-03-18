@@ -1,3 +1,8 @@
+---
+name: React Patterns
+description: Canonical patterns for React applications covering component design, hooks, state management, and data fetching
+---
+
 # React Patterns
 
 Canonical patterns for building React applications. Covers component design, hooks, state management, data fetching, and accessibility.

@@ -1,3 +1,8 @@
+---
+name: JavaScript Best Practices
+description: Modern JavaScript patterns for non-TypeScript projects covering ES2024+ idioms, tooling, and common pitfalls
+---
+
 # JavaScript Best Practices
 
 Modern JavaScript patterns for projects that do not use TypeScript. Covers ES2024+ idioms, tooling, project structure, and common pitfalls.
