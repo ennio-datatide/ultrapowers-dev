@@ -1,8 +1,33 @@
-# Ultrapowers Dev
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.png">
+    <img src=".github/assets/logo.png" alt="Ultrapowers Dev" width="140" />
+  </picture>
+</p>
 
-54 development skills for your coding agents — language best practices for 13 languages, 12 framework patterns, 7 agentic patterns, and architecture fundamentals. A companion plugin to [Ultrapowers](https://github.com/ennio-datatide/ultrapowers).
+<h1 align="center">Ultrapowers Dev</h1>
 
-**[Documentation](https://www.datatide.com/ultrapowers)** · **[GitHub](https://github.com/ennio-datatide/ultrapowers-dev)** · **[Issues](https://github.com/ennio-datatide/ultrapowers-dev/issues)**
+<p align="center">
+  <strong>54 development skills for your coding agents.</strong><br/>
+  Language best practices for 13 languages, 12 framework patterns, 7 agentic patterns, and architecture fundamentals.<br/>
+  Companion plugin to <a href="https://github.com/ennio-datatide/ultrapowers">Ultrapowers</a>.
+</p>
+
+<p align="center">
+  <a href="https://github.com/ennio-datatide/ultrapowers-dev/releases"><img alt="Version" src="https://img.shields.io/badge/plugin-v1.2.0-6d28d9?style=flat-square"></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/ennio-datatide/ultrapowers-dev?color=6d28d9&style=flat-square"></a>
+  <a href="https://github.com/ennio-datatide/ultrapowers-dev/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/ennio-datatide/ultrapowers-dev?color=6d28d9&style=flat-square"></a>
+  <a href="https://github.com/ennio-datatide/ultrapowers-dev/pulls"><img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-6d28d9?style=flat-square"></a>
+  <a href="https://docs.claude.com/en/docs/claude-code"><img alt="Claude Code" src="https://img.shields.io/badge/Claude%20Code-plugin-6d28d9?style=flat-square"></a>
+</p>
+
+<p align="center">
+  <a href="https://datatide.io/ultrapowers"><strong>Documentation</strong></a> ·
+  <a href="https://github.com/ennio-datatide/ultrapowers-dev"><strong>GitHub</strong></a> ·
+  <a href="https://github.com/ennio-datatide/ultrapowers-dev/issues"><strong>Issues</strong></a>
+</p>
+
+---
 
 ## How it works
 
@@ -199,7 +224,8 @@ Skills live directly in this repository. To contribute:
 
 ## Community
 
-Built by [Ennio Maldonado](https://www.enniomaldonado.com) at [Datatide](https://www.datatide.com).
+Built by [Ennio Maldonado](https://www.enniomaldonado.com) at [DataTide](https://datatide.io).
 
-- **Docs**: https://www.datatide.com/ultrapowers
+- **Docs**: https://datatide.io/ultrapowers
 - **Issues**: https://github.com/ennio-datatide/ultrapowers-dev/issues
+- **Course**: https://ultrapowers.dev
