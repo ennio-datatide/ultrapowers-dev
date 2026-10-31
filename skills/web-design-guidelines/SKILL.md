@@ -1,6 +1,14 @@
 ---
 name: web-design-guidelines
 description: Use when asked to review UI code, check accessibility, audit design, review UX, or check a site against best practices
+license: MIT
+metadata:
+  author: vercel
+  version: "1.0.0"
+  argument-hint: <file-or-pattern>
+  upstream: vercel-labs/agent-skills/skills/web-design-guidelines
+  upstream-commit: 1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62
+  upstream-date: "2026-10-27"
 ---
 
 # Web Interface Guidelines
@@ -36,4 +44,4 @@ If no files specified, ask the user which files to review.
 
 ## Attribution
 
-**Derived from** [vercel-labs/agent-skills/web-design-guidelines](https://github.com/vercel-labs/agent-skills) — MIT licensed, Copyright (c) Vercel. Included with minimal modifications.
+**Derived from** [vercel-labs/agent-skills/web-design-guidelines](https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines) — MIT licensed, Copyright (c) Vercel. Included with minimal modifications.
