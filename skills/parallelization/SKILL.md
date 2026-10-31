@@ -108,4 +108,4 @@ async def parallel_review(text: str) -> dict:
 Parallelization multiplies cost linearly but can improve quality logarithmically -- use it surgically where reliability matters, not as a default.
 
 ## Attribution
-**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns).
+**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://www.anthropic.com/research/building-effective-agents).

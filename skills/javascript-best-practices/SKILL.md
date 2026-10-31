@@ -51,4 +51,6 @@ Modern JavaScript patterns for projects that do not use TypeScript. Covers ES202
 
 ---
 
-Attribution: Original -- Datatide, MIT licensed.
+## Attribution
+
+**Original** -- Datatide, MIT licensed.

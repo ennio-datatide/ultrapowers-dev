@@ -123,4 +123,4 @@ else:
 Debate is most valuable when the cost of a wrong decision exceeds the cost of 3-5 extra LLM calls -- use it for architecture, strategy, and safety, not for routine tasks.
 
 ## Attribution
-**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns).
+**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://www.anthropic.com/research/building-effective-agents).

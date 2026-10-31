@@ -289,3 +289,7 @@ fn test_session_list_render() {
 | Hardcoding colors in view functions | Define all colors in `theme.rs` as constants |
 | Blocking in the event loop | Every I/O operation must be async. Use channels for cross-task communication |
 | Not handling terminal resize | Listen for `Event::Resize` in the event loop, recompute layouts |
+
+## Attribution
+
+**Original** -- Datatide, MIT licensed.

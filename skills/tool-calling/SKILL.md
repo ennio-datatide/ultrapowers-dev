@@ -129,4 +129,4 @@ if response.stop_reason == "tool_use":
 Tool calling quality is 80% tool descriptions and schemas, 20% model capability -- invest in clear, unambiguous definitions before tuning anything else.
 
 ## Attribution
-**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns).
+**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://www.anthropic.com/research/building-effective-agents).

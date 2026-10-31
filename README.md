@@ -8,7 +8,7 @@
 <h1 align="center">Ultrapowers Dev</h1>
 
 <p align="center">
-  <strong>54 development skills for your coding agents.</strong><br/>
+  <strong>55 development skills for your coding agents.</strong><br/>
   Language best practices for 13 languages, 12 framework patterns, 7 agentic patterns, and architecture fundamentals.<br/>
   Companion plugin to <a href="https://github.com/ennio-datatide/ultrapowers">Ultrapowers</a>.
 </p>
@@ -142,7 +142,7 @@ Frameworks where no official skill exists. Each language skill points to these.
 
 | Skill | Attribution |
 |-------|-------------|
-| `frontend-design` | Derived from [anthropics/skills](https://github.com/anthropics/skills) (MIT) |
+| `frontend-design` | Derived from [anthropics/skills](https://github.com/anthropics/skills) (Apache 2.0) |
 | `react-best-practices` | Derived from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT) |
 | `react-patterns` | Canonical React patterns for component design, hooks, and state |
 | `web-design-guidelines` | Derived from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) (MIT) |
@@ -189,12 +189,25 @@ We believe in giving credit where it's due. Each skill has an attribution sectio
 - **Derived from [source]** — Modified version, original attribution and license preserved
 - **Forked from [source]** — Minimal changes, original license applies
 
+### Attribution by skill
+
+| Origin | Skills |
+|--------|--------|
+| Derived, Apache 2.0, tracks [anthropics/skills](https://github.com/anthropics/skills) `ca45fc4` (2026-10-28) | `frontend-design` |
+| Derived, MIT, tracks [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) `1a2c79d` (2026-10-27) | `react-best-practices`, `web-design-guidelines` |
+| Original, inspired by [Building effective agents](https://www.anthropic.com/research/building-effective-agents) | `agent-loop`, `dag-workflows`, `multi-agent-debate`, `multi-agent-handoffs`, `orchestrator-workers`, `parallelization`, `tool-calling` |
+| Original, inspired by [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | `typescript-best-practices` |
+| Original, inspired by [obra/superpowers](https://github.com/obra/superpowers) | `testing-tdd` |
+| Original, Datatide | Every other skill |
+
+Derived skills record their upstream commit in `metadata`, so the next audit can diff against it.
+
 ### Credits
 
-- **[Anthropic](https://github.com/anthropics/skills)** (MIT) — Frontend design inspiration
-- **[Vercel](https://github.com/vercel-labs/agent-skills)** (MIT) — React best practices, web design guidelines
-- **[Jesse Vincent / obra](https://github.com/obra/superpowers)** (MIT) — TDD methodology inspiration
-- **[Anthropic Docs](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns)** — Agent pattern documentation
+- **[Anthropic](https://github.com/anthropics/skills)** (Apache 2.0) — `frontend-design`, derived; see its `LICENSE.txt`
+- **[Vercel](https://github.com/vercel-labs/agent-skills)** (MIT) — `react-best-practices` and `web-design-guidelines`, derived; `typescript-best-practices`, inspired
+- **[Jesse Vincent / obra](https://github.com/obra/superpowers)** (MIT) — `testing-tdd`, inspired
+- **[Anthropic, Building effective agents](https://www.anthropic.com/research/building-effective-agents)** — Inspired the seven agentic pattern skills
 - **[Supabase](https://github.com/supabase/agent-skills)** — Supabase patterns reference
 - **[antfu](https://github.com/antfu/skills)** — Vue/Vite/Vitest skills reference
 

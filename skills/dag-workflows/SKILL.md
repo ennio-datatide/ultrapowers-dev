@@ -115,4 +115,4 @@ async def run_dag(user_input: str):
 DAG workflows give you the parallelism of fan-out with the control flow of a pipeline -- but only when the graph structure is known ahead of time.
 
 ## Attribution
-**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns).
+**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://www.anthropic.com/research/building-effective-agents).

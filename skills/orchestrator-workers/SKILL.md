@@ -116,4 +116,4 @@ print(final.content[0].text)
 The orchestrator pattern trades latency and cost for quality -- it only pays off when the task genuinely benefits from specialized perspectives that a single prompt cannot provide.
 
 ## Attribution
-**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns).
+**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://www.anthropic.com/research/building-effective-agents).

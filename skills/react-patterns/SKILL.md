@@ -68,4 +68,6 @@ Avoid prop drilling beyond two levels -- lift state up or introduce context. Kee
 
 ---
 
-Attribution: Original -- Datatide, MIT licensed. For performance optimization rules, see also `react-best-practices` (derived from Vercel).
+## Attribution
+
+**Original** -- Datatide, MIT licensed. For performance optimization rules, see also `react-best-practices` (derived from Vercel).

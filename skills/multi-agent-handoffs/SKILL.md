@@ -131,4 +131,4 @@ while True:
 Handoff quality depends more on what context you transfer between agents than on how accurately you route -- invest in the handoff object, not just the classifier.
 
 ## Attribution
-**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns).
+**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://www.anthropic.com/research/building-effective-agents).

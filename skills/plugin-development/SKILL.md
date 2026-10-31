@@ -266,3 +266,7 @@ Windows CMD sees `:` as a label and runs the batch block. Unix bash sees it as a
 | `description` at root of marketplace.json | Use `metadata.description` instead |
 | Hardcoded paths in hooks | Use `${CLAUDE_PLUGIN_ROOT}` variable |
 | No validation before push | Always run `claude plugin validate .` |
+
+## Attribution
+
+**Original** -- Datatide, MIT licensed.

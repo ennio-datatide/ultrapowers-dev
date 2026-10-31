@@ -74,4 +74,4 @@ Each cycle: 1-5 minutes. Longer means your step is too big.
 | No test for the bug you fixed | Every bug fix starts with a failing test |
 
 ## Attribution
-**Original** -- Datatide, MIT licensed.
+**Original** -- Datatide, MIT licensed. Inspired by [obra/superpowers](https://github.com/obra/superpowers).

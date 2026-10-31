@@ -101,4 +101,4 @@ print(response.content[0].text)
 The agent loop's power comes from letting the model decide the next action, but its reliability comes from the guardrails you put around it -- turn budgets, context management, and error handling.
 
 ## Attribution
-**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://docs.anthropic.com/en/docs/build-with-claude/agent-patterns).
+**Original** -- Datatide, MIT licensed. Inspired by [Anthropic agent patterns documentation](https://www.anthropic.com/research/building-effective-agents).
